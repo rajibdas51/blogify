@@ -10,9 +10,15 @@ const Navbar = () => {
       <div className={styles.logo}>Blogify</div>
       <div className={styles.links}>
         <ThemeToggle />
-        <Link href='/'>Homepage</Link>
-        <Link href='/contact'>Contact</Link>
-        <Link href='/about'>About</Link>
+        <Link href='/' className={styles.link}>
+          Homepage
+        </Link>
+        <Link href='/contact' className={styles.link}>
+          Contact
+        </Link>
+        <Link href='/about' className={styles.link}>
+          About
+        </Link>
         <AuthLinks />
       </div>
       <div className={styles.social}>
