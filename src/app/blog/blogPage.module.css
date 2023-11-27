@@ -1,0 +1,12 @@
+.container {
+}
+.title {
+  background-color: rgb(255, 80, 80);
+  color: white;
+  padding: white;
+  text-align: center;
+}
+.content {
+  display: flex;
+  gap: 50px;
+}
