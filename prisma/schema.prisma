@@ -45,7 +45,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  posts          Post[]
+  posts         Post[]    @relation("userWithPost")
   Comments      Comment[]
 }
 
@@ -62,22 +62,23 @@ model Category {
   slug  String  @unique
   title String
   img   String?
-  posts Post[]
+  posts Post[]  @relation("categoryWithPost")
 }
 
 model Post {
-  id        String    @id @default(cuid()) @map("_id")
-  createdAt DateTime  @default(now())
-  slug      String    @unique
+  id        String   @id @default(cuid()) @map("_id")
+  createdAt DateTime @default(now())
+  slug      String   @unique
   title     String
   desc      String
   img       String?
-  views     Int       @default(0)
+  views     Int      @default(0)
+  cat       Category @relation("categoryWithPost", fields: [catSlug], references: [slug])
   catSlug   String
-  cat       Category  @relation(fields: [catSlug], references: [slug])
+  user      User     @relation("userWithPost", fields: [userEmail], references: [email])
   userEmail String
-  user      User     @relation(fields: [userEmail], references: [email])
-  comments  Comment[]
+
+  comments Comment[]
 }
 
 model Comment {

@@ -5,6 +5,7 @@
   color: white;
   padding: white;
   text-align: center;
+  text-transform: capitalize;
 }
 .content {
   display: flex;
