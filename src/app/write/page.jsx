@@ -10,11 +10,12 @@ const WritePage = () => {
   const [open, setOpen] = useState(true);
   const [value, setValue] = useState('');
   const { status } = useSession();
+  const [file, setFile] = useState(null);
   const router = useRouter();
   if (status === 'loading') {
     return <div className={styles.loading}>Loading...</div>;
   }
-  if (status === 'authenticated') {
+  if (status === 'unauthenticated') {
     router.push('/');
   }
   return (

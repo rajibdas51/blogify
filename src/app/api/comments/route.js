@@ -1,22 +1,49 @@
+import { getAuthSession } from '@/utils/auth';
 import prisma from '@/utils/connect';
 import { NextResponse } from 'next/server';
 
-// Get all the comments of a single post
+// GET ALL COMMENTS OF A POST
 export const GET = async (req) => {
-  const { searchparams } = new URL(req.url);
-  const postSlug = searchparams.get('postSlug');
+  const { searchParams } = new URL(req.url);
+
+  const postSlug = searchParams.get('postSlug');
 
   try {
-    // inside the where condition, we are checking if postSlug exists if yes then find the comments based on that slug.
-    const comments = prisma.comment.findMany({
+    const comments = await prisma.comment.findMany({
       where: {
-        ...(postSlug && { postSlug }), // same as this ,  where: postSlug ? { postSlug } : {},
+        ...(postSlug && { postSlug }),
       },
+      include: { user: true },
     });
 
     return new NextResponse(JSON.stringify(comments, { status: 200 }));
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    return new NextResponse(
+      JSON.stringify({ message: 'Something went wrong!' }, { status: 500 })
+    );
+  }
+};
+
+// CREATE A COMMENT
+
+export const POST = async (req) => {
+  const session = await getAuthSession();
+  if (!session) {
+    return new NextResponse(
+      JSON.stringify({ message: 'Not Authenticated!' }, { status: 401 })
+    );
+  }
+
+  try {
+    const body = await req.json();
+    const comment = await prisma.comment.create({
+      data: { ...body, userEmail: session.user.email },
+    });
+
+    return new NextResponse(JSON.stringify(comment, { status: 200 }));
+  } catch (err) {
+    // console.log(err);
     return new NextResponse(
       JSON.stringify({ message: 'Something went wrong!' }, { status: 500 })
     );

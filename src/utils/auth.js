@@ -18,4 +18,5 @@ export const authOptions = {
   ],
 };
 
+// get session on the server side
 export const getAuthSession = () => getServerSession(authOptions);

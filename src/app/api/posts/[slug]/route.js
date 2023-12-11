@@ -1,12 +1,14 @@
 import prisma from '@/utils/connect';
 import { NextResponse } from 'next/server';
 
-// Get single post
+// GET SINGLE POST
 export const GET = async (req, { params }) => {
   const { slug } = params;
+
   try {
-    const post = prisma.post.findUnique({
-      where: { slug }, // same as where:{slug:slug}
+    const post = await prisma.post.update({
+      where: { slug },
+      data: { views: { increment: 1 } },
       include: { user: true },
     });
 

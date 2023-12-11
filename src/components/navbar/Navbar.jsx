@@ -7,7 +7,9 @@ import ThemeToggle from '../themeToggle/ThemeToggle';
 const Navbar = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>Blogify</div>
+      <div className={styles.logo}>
+        <Link href='/'>Blogify</Link>
+      </div>
       <div className={styles.links}>
         <ThemeToggle />
         <Link href='/' className={styles.link}>
