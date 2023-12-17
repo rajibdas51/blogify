@@ -76,6 +76,19 @@
 
 @media screen and (max-width: 640px) {
   .title {
-    font-size: 32px;
+    font-size: 28px;
+  }
+  .post {
+    display: flex;
+    flex-direction: column;
+  }
+  .postTitle {
+    font-size: 28px;
+  }
+  .postDesc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--softTextColor);
+    line-height: 30px;
   }
 }

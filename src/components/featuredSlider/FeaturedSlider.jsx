@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import styles from './featured.module.css';
+import styles from './featuredSlider.module.css';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SingleSlide from '../slide/SingleSlide';
