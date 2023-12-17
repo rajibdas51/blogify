@@ -4,12 +4,10 @@ import { NextResponse } from 'next/server';
 
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
-
-  const page = parseInt(searchParams.get('page'));
+  const page = parseInt(searchParams.get('page')) || 1;
   const cat = searchParams.get('cat');
 
-  const POST_PER_PAGE = 2;
-
+  const POST_PER_PAGE = 3;
   const query = {
     take: POST_PER_PAGE,
     skip: POST_PER_PAGE * (page - 1),
@@ -31,6 +29,8 @@ export const GET = async (req) => {
     );
   }
 };
+
+// GET all the posts without any conditions
 
 // CREATE A POST
 export const POST = async (req) => {
