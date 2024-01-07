@@ -36,7 +36,7 @@ const Featured = () => {
   useEffect(() => {
     setPosts(data);
   }, [data]);
-  console.log(data);
+  //console.log(data);
   SwiperCore.use[Autoplay];
   return (
     <div className={styles.container}>
@@ -55,8 +55,8 @@ const Featured = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className='mySwiper'
       >
-        {data?.posts?.map((item) => (
-          <SwiperSlide key={item._id}>
+        {data?.posts?.map((item, i) => (
+          <SwiperSlide key={i}>
             <SingleSlide item={item} />
           </SwiperSlide>
         ))}

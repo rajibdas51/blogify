@@ -1,4 +1,4 @@
-import Menu from '@/components/menu/Menu';
+import Menu from '@/components/menu/Menu.jsx';
 import styles from './singlePage.module.css';
 import Image from 'next/image';
 import Comments from '@/components/comments/Comments';

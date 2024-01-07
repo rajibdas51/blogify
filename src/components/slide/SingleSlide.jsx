@@ -3,7 +3,7 @@ import styles from './singleSlide.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 const SingleSlide = ({ item }) => {
-  console.log(item);
+  //console.log(item);
   return (
     <div className={styles.post}>
       <div className={styles.imgContainer}>
