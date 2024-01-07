@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import styles from './write.module.css';
+import styles from './writePage.module.css';
 import { useEffect, useState } from 'react';
 import 'react-quill/dist/quill.bubble.css';
 import { useRouter } from 'next/navigation';
@@ -106,7 +106,6 @@ const WritePage = () => {
       <select
         className={styles.select}
         onChange={(e) => setCatSlug(e.target.value)}
-        placeholder='Select Category'
       >
         <option value='style'>style</option>
         <option value='fashion'>fashion</option>
