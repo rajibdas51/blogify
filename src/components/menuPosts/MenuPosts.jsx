@@ -2,82 +2,42 @@ import Image from 'next/image';
 import styles from './menuPosts.module.css';
 import Link from 'next/link';
 
-const MenuPosts = ({ withImage }) => {
+const getData = async (page, cat) => {
+  const res = await fetch(`http://localhost:3000/api/posts?page=2`, {
+    cache: 'no-store',
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed');
+  }
+
+  return res.json();
+};
+const MenuPosts = async ({ withImage }) => {
+  const { posts, count } = await getData();
+
   return (
     <div className={styles.items}>
-      <Link href='/' className={styles.item}>
-        {withImage && (
-          <div className={styles.imageContainer}>
-            <Image src='/coding.png' alt='' fill className={styles.image} />
-          </div>
-        )}
+      {posts.map((item) => (
+        <Link href='/' className={styles.item} key={item._id}>
+          {withImage && (
+            <div className={styles.imageContainer}>
+              <Image src={item.img} alt='' fill className={styles.image} />
+            </div>
+          )}
 
-        <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.coding}`}>Coding</span>
-          <h3 className={styles.postTitle}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h3>
-          <div className={styles.detail}>
-            <span className={styles.username}>John Doe</span>
-            <span> - 12.11.2023</span>
+          <div className={styles.textContainer}>
+            <span className={`${styles.category} ${styles.coding}`}>
+              {item.catSlug}
+            </span>
+            <h3 className={styles.postTitle}>{item.title}</h3>
+            <div className={styles.detail}>
+              <span className={styles.username}>item.user.name</span>
+              <span> - {item.createdAt.substring(0, 10)}</span>
+            </div>
           </div>
-        </div>
-      </Link>
-      <Link href='/' className={styles.item}>
-        {withImage && (
-          <div className={styles.imageContainer}>
-            <Image src='/food.png' alt='' fill className={styles.image} />
-          </div>
-        )}
-        <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.food}`}>Food</span>
-          <h3 className={styles.postTitle}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h3>
-          <div className={styles.detail}>
-            <span className={styles.username}>John Doe</span>
-            <span> - 12.11.2023</span>
-          </div>
-        </div>
-      </Link>
-      <Link href='/' className={styles.item}>
-        {withImage && (
-          <div className={styles.imageContainer}>
-            <Image src='/fashion.png' alt='' fill className={styles.image} />
-          </div>
-        )}
-        <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.fashion}`}>
-            fashion
-          </span>
-          <h3 className={styles.postTitle}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h3>
-          <div className={styles.detail}>
-            <span className={styles.username}>John Doe</span>
-            <span> - 12.11.2023</span>
-          </div>
-        </div>
-      </Link>
-      <Link href='/' className={styles.item}>
-        {withImage && (
-          <div className={styles.imageContainer}>
-            <Image src='/culture.png' alt='' fill className={styles.image} />
-          </div>
-        )}
-        <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.culture}`}>
-            Culture
-          </span>
-          <h3 className={styles.postTitle}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h3>
-          <div className={styles.detail}>
-            <span className={styles.username}>John Doe</span>
-            <span> - 12.11.2023</span>
-          </div>
-        </div>
-      </Link>
+        </Link>
+      ))}
     </div>
   );
 };
