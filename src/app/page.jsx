@@ -3,7 +3,7 @@ import styles from './homepage.module.css';
 import FeaturedSlider from '@/components/featuredSlider/FeaturedSlider.jsx';
 import CategoryList from '@/components/categoryList/CategoryList.jsx';
 import CardList from '@/components/cardList/CardList.jsx';
-import Menu from '@/components/menu/Menu.jsx';
+import Menu from '../components/menu/Menu.jsx';
 import FeaturedPosts from '@/components/featuredPosts/FeaturedPosts.jsx';
 
 export default function Home({ searchParams }) {
