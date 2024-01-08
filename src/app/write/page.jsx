@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import 'react-quill/dist/quill.bubble.css';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import dynamic from 'next/dynamic';
+
 import {
   getStorage,
   ref,
@@ -13,7 +15,7 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import { app } from '@/utils/firebase';
-import ReactQuill from 'react-quill';
+const DynamicReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const WritePage = () => {
   const { status } = useSession();
@@ -139,7 +141,7 @@ const WritePage = () => {
             </button>
           </div>
         )}
-        <ReactQuill
+        <DynamicReactQuill
           className={styles.textArea}
           theme='bubble'
           value={value}
