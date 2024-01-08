@@ -16,7 +16,9 @@ export const ThemeContextProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', theme);
+    }
   }, [theme]);
 
   const toggle = () => {
