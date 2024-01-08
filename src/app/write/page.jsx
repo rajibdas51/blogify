@@ -16,8 +16,9 @@ import { app } from '@/utils/firebase';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.bubble.css';
-
 const WritePage = () => {
+  const { isFallback } = useRouter();
+
   const { status } = useSession();
   const router = useRouter();
 
@@ -98,7 +99,9 @@ const WritePage = () => {
       router.push(`/posts/${data.slug}`);
     }
   };
-
+  if (isFallback) {
+    return <h1>Fallback</h1>;
+  }
   return (
     <div className={styles.container}>
       <input
