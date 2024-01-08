@@ -1,0 +1,10 @@
+.container {
+  margin-top: 60px;
+  max-width: 90vw;
+}
+.container p {
+  line-height: 36px;
+}
+.heading {
+  margin-bottom: 50px;
+}
