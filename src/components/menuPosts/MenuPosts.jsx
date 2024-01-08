@@ -3,7 +3,7 @@ import styles from './menuPosts.module.css';
 import Link from 'next/link';
 
 const getData = async (page, cat) => {
-  const res = await fetch(`http://localhost:3000/api/posts?page=2`, {
+  const res = await fetch(`blogify-plum.vercel.app/api/posts?page=2`, {
     cache: 'no-store',
   });
 

@@ -29,7 +29,7 @@ const fetcher = async (url) => {
 
 const Featured = () => {
   const { data, isLoading } = useSWR(
-    'http://localhost:3000/api/posts',
+    'blogify-plum.vercel.app/api/posts',
     fetcher
   );
   const [posts, setPosts] = useState([]);
